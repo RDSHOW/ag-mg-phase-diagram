@@ -1,21 +1,15 @@
-<![CDATA[<div align="center">
-
 # ⚛️ Ag–Mg Interactive Binary Phase Diagram
 
 **A browser-based scientific visualization tool for exploring the Silver–Magnesium binary alloy system in real time**
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Vercel-000?style=for-the-badge&logo=vercel)](https://ag-mg-phase-diagram.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-000?style=for-the-badge&logo=vercel)](https://ag-mg-phase-diagram.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-8b5cf6?style=for-the-badge)](./LICENSE)
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-14b8a6?style=for-the-badge)]()
 [![HTML5 Canvas](https://img.shields.io/badge/Rendered_with-HTML5_Canvas-e34f26?style=for-the-badge&logo=html5&logoColor=white)]()
 
-<br/>
-
-<img src="Ag Mg phase diagram.png" alt="Ag-Mg Phase Diagram Preview" width="700"/>
+![Ag-Mg Phase Diagram Preview](Ag%20Mg%20phase%20diagram.png)
 
 *Interactive phase diagram with real-time lever rule, microstructure visualization, and PDF export — all in a single HTML file.*
-
-</div>
 
 ---
 
@@ -38,19 +32,19 @@ The **Ag–Mg Interactive Phase Diagram** is a zero-dependency, fully client-sid
 | Feature | Description |
 |---------|-------------|
 | 📊 **Interactive Phase Diagram** | Full Ag–Mg diagram (100–1000 °C, 0–100 wt.% Mg) with color-coded regions, piecewise boundary curves, and hover tooltips |
-| 🎛️ **Real-Time Sliders** | Temperature & composition controls with instant diagram/microstructure updates |
+| 🎛️ **Real-Time Sliders** | Temperature and composition controls with instant diagram/microstructure updates |
 | ⚖️ **Lever Rule Engine** | Automatic phase fraction calculation for two-phase regions with animated segmented bar chart |
 | 🔬 **Microstructure Visualization** | Canvas-based rendering of 6 distinct microstructure types: uniform grains, precipitates, dendrites, lamellar eutectic, intermetallic, and liquid |
-| ▶️ **Composition Sweep Animation** | Animated marker sweep across the diagram at adjustable speed with ping-pong mode |
+| ▶️ **Composition Sweep** | Animated marker sweep across the diagram at adjustable speed with ping-pong mode |
 | 🥧 **Phase Fraction Pie Chart** | Real-time pie chart showing proportional phase distribution |
 | 🏷️ **Hover Tooltips** | Mouse-over any diagram point to see phase info, temperature, and composition |
 | ⬇️ **PDF Export** | Browser-native print dialog for generating analysis reports |
-| 🌙 **Dark Mode UI** | Premium dark-mode design with glassmorphism cards, gradient accents, and animated borders |
+| 🌙 **Dark Mode UI** | Premium dark-mode design with glassmorphism cards and gradient accents |
 | 📱 **Responsive Layout** | CSS Grid layout that adapts from desktop to tablet |
 
 ---
 
-## 🏗️ Architecture & Technical Details
+## 🏗️ Architecture
 
 ### Phase Detection Algorithm
 
@@ -76,7 +70,7 @@ Input: (Temperature T, Composition C₀)
 
 ### Lever Rule
 
-For composition C₀ in a two-phase field bounded by [C₁, C₂]:
+For composition C₀ in a two-phase field bounded by C₁ and C₂:
 
 ```
 f₁ = (C₂ − C₀) / (C₂ − C₁)     ← fraction of phase 1
@@ -89,27 +83,27 @@ f₂ = (C₀ − C₁) / (C₂ − C₁)     ← fraction of phase 2
 Raw CSV Data (9,986 points)
     │
     ├─ process_liquidus.py ──→ RDP Simplification ──→ 276 points
-    │                                                    │
-    ├─ process_alpha_solidus.py ──→ RDP ──→ 18 points    │
-    │                                                    │
-    └─ Manual digitization from ASM Handbook ────────────┤
-                                                         │
-                                                    Embedded as JS
-                                                    arrays in HTML
+    │
+    ├─ process_alpha_solidus.py ──→ RDP ──→ 18 points
+    │
+    └─ Manual digitization from ASM Handbook
+                                    │
+                                    ▼
+                            Embedded as JS arrays in HTML
 ```
 
 ### Microstructure Rendering Engine
 
 | Phase State | Visual Pattern | Technique |
 |------------|----------------|-----------|
-| Liquid | Swirling atoms & convection | Radial gradient + scattered circles |
+| Liquid | Swirling atoms and convection | Radial gradient + scattered circles |
 | α (FCC Ag-rich) | Equiaxed grains | Voronoi-like polygons with grain boundaries |
-| β' (AgMg B2) | Ordered blocks | Rectangular tiles with internal superlattice lines |
-| α + β' | Precipitate dispersion | Matrix grains + scattered second-phase particles |
+| β' (AgMg B2) | Ordered blocks | Rectangular tiles with superlattice lines |
+| α + β' | Precipitate dispersion | Matrix grains + scattered particles |
 | Eutectic (E1, E2) | Alternating lamellae | Waviness-modulated stripe pattern |
-| L + α, L + β', L + δ | Dendritic solidification | Recursive branching algorithm with depth scaling |
+| L + solid | Dendritic solidification | Recursive branching algorithm |
 
-All microstructure patterns use a **seeded PRNG** (`mulberry32`) for deterministic, reproducible results at any (T, C₀).
+All patterns use a **seeded PRNG** (mulberry32) for deterministic, reproducible results.
 
 ---
 
@@ -117,9 +111,9 @@ All microstructure patterns use a **seeded PRNG** (`mulberry32`) for determinist
 
 | Layer | Technology | Purpose |
 |-------|-----------|---------|
-| **Structure** | HTML5 | Single-file application architecture |
+| **Structure** | HTML5 | Single-file application |
 | **Styling** | CSS3 Custom Properties | Dark-mode design system with responsive grid |
-| **Logic** | Vanilla ES2020 JavaScript | Phase detection, lever rule, animation engine |
+| **Logic** | Vanilla ES2020 JavaScript | Phase detection, lever rule, animation |
 | **Rendering** | HTML5 Canvas 2D API | Phase diagram + microstructure visualization |
 | **Typography** | Google Fonts (Inter + JetBrains Mono) | Professional scientific UI |
 | **Data Processing** | Python 3 (offline) | CSV parsing + RDP curve simplification |
@@ -133,33 +127,24 @@ All microstructure patterns use a **seeded PRNG** (`mulberry32`) for determinist
 
 ```
 ag-mg-phase-diagram/
-│
-├── index.html                   # Main application (deployed to Vercel)
-├── Final Website.html           # Final polished version
-│
-├── data/                        # Source data
-│   (CSV files in root)
-├── Liquidus Dataset.csv         # Raw liquidus data (9,986 experimental points)
-├── alpha solidus.csv            # Raw α-solidus boundary data (930 points)
-├── Ag Mg phase diagram.png      # Reference phase diagram image
-│
-├── scripts/                     # Pre-processing scripts
-│   (Python scripts in root)
-├── process_liquidus.py          # Liquidus CSV → RDP-simplified JS array
-├── process_alpha_solidus.py     # α-solidus CSV → RDP-simplified JS array
-├── generate_report.py           # Auto-generates Word document report
-├── isotherm.py                  # Isotherm analysis utility
-│
-├── liquidus_js.txt              # Processed JS array output (276 points)
-├── alpha_solidus_js.txt         # Processed JS array output (18 points)
-│
-├── Ag-Mg Phase Diagram Project Report.docx  # Generated project report
-├── REPORT.md                    # Technical methodology report
-├── README.md                    # This file
-├── LICENSE                      # MIT License
-├── package.json                 # npm/Vercel project metadata
-├── vercel.json                  # Vercel deployment configuration
-└── .gitignore                   # Git ignore rules
+├── index.html                    # Main application (deployed to Vercel)
+├── Final Website.html            # Final polished version
+├── Liquidus Dataset.csv          # Raw liquidus data (9,986 experimental points)
+├── alpha solidus.csv             # Raw α-solidus boundary data (930 points)
+├── Ag Mg phase diagram.png       # Reference phase diagram image
+├── process_liquidus.py           # Liquidus CSV → RDP-simplified JS array
+├── process_alpha_solidus.py      # α-solidus CSV → RDP-simplified JS array
+├── generate_report.py            # Auto-generates Word document report
+├── isotherm.py                   # Isotherm analysis utility
+├── liquidus_js.txt               # Processed JS array output (276 points)
+├── alpha_solidus_js.txt          # Processed JS array output (18 points)
+├── REPORT.md                     # Technical methodology report
+├── README.md                     # This file
+├── CONTRIBUTING.md               # Contribution guidelines
+├── LICENSE                       # MIT License
+├── package.json                  # npm/Vercel project metadata
+├── vercel.json                   # Vercel deployment config
+└── .gitignore                    # Git ignore rules
 ```
 
 ---
@@ -183,32 +168,26 @@ npx serve . -p 3000
 
 # Option 2: Python
 python -m http.server 3000
-
-# Option 3: VS Code Live Server extension
-# Right-click index.html → "Open with Live Server"
 ```
 
-Then visit **http://localhost:3000**
+Then visit `http://localhost:3000`
 
 ### Regenerate Boundary Data (Optional)
 
 ```bash
-# Requires Python 3.x
-python process_liquidus.py          # → liquidus_js.txt
-python process_alpha_solidus.py     # → alpha_solidus_js.txt
+python process_liquidus.py          # → liquidus_js.txt (276 points)
+python process_alpha_solidus.py     # → alpha_solidus_js.txt (18 points)
 ```
 
 ---
 
 ## 🌐 Deployment
 
-The app is deployed on Vercel as a static site:
+Deployed on Vercel as a static site:
 
 1. Push to GitHub
 2. Import at [vercel.com/new](https://vercel.com/new)
-3. Deploy — auto-detected as static site via `vercel.json`
-
-**Live URL**: [ag-mg-phase-diagram.vercel.app](https://ag-mg-phase-diagram.vercel.app)
+3. Deploy — auto-detected via `vercel.json`
 
 ---
 
@@ -233,14 +212,14 @@ The app is deployed on Vercel as a static site:
 
 ---
 
-## 🧪 Assumptions & Limitations
+## 🧪 Assumptions and Limitations
 
-- Phase boundaries are **piecewise-linear** approximations (not full CALPHAD thermodynamic polynomials)
-- Assumes **thermodynamic equilibrium** only; no kinetic effects (undercooling, rapid solidification)
+- Phase boundaries are **piecewise-linear** approximations (not full CALPHAD polynomials)
+- Assumes **thermodynamic equilibrium** only — no kinetic effects
 - Accuracy: approximately **±10 °C** and **±2 wt.%** vs. reference diagrams
-- **Metastable phases** are excluded
+- **Metastable phases** excluded
 - Microstructure images are **schematic/algorithmic** — representative, not simulation-accurate
-- Composition axis uses **wt.% Mg** (weight percent) throughout
+- Composition axis uses **wt.% Mg** throughout
 
 ---
 
@@ -259,11 +238,4 @@ This project is licensed under the **MIT License** — see the [LICENSE](./LICEN
 
 ---
 
-<div align="center">
-
-**Built with ❤️ during Packathon 2026**
-
-*HTML5 Canvas · Vanilla JavaScript · Zero Dependencies*
-
-</div>
-]]>
+**Built with ❤️ during Packathon 2026** — HTML5 Canvas · Vanilla JavaScript · Zero Dependencies
