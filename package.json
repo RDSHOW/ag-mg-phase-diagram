@@ -1,0 +1,12 @@
+{
+  "name": "ag-mg-phase-diagram",
+  "version": "1.0.0",
+  "description": "Interactive Silver-Magnesium Binary Phase Diagram",
+  "scripts": {
+    "dev": "npx serve . -p 3000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": ["phase-diagram", "materials-science", "ag-mg", "interactive"],
+  "author": "Packathon 2026",
+  "license": "MIT"
+}

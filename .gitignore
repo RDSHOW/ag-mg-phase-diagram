@@ -1,0 +1,39 @@
+<![CDATA[# Dependencies
+node_modules/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temp files
+~$*
+*.tmp
+*.bak
+
+# Build artifacts
+implementation_plan.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+venv/
+]]>
